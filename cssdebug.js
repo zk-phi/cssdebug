@@ -34,8 +34,8 @@ var TOOLTIP_STYLE = `
     border-radius: 2px;
     z-index: 999999;
 }
-.cssdebug > .i > .id { color: #008c40; }
-.cssdebug > .i > .class { color: #0064ff; }
+.cssdebug > .i > .id { color: #ffb384; }
+.cssdebug > .i > .class { color: #84b3ff; }
 .cssdebug.selected > .i { display: none }
 `;
 
@@ -168,8 +168,8 @@ function renderGuide (elem) {
     var tooltip = createDIVWithClass('i');
     tooltip.innerHTML = `
         ${ elem.tagName.toLowerCase() }
-        <span class="id">${ elem.id }</span>
-        <span class="class">${ elem.className }</span>
+        <span class="id">${ elem.id ? "#" + elem.id : "" }</span>
+        <span class="class">${ elem.className ? "." + elem.className.replace(/\s/g, ".") : "" }</span>
         (${ boundingRect.height } x ${ boundingRect.width })
     `;
     tooltip.style.top = boundingRect.top - 16 + offsetY + 'px';
