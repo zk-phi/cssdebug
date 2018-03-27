@@ -36,6 +36,7 @@ var TOOLTIP_STYLE = `
 }
 .cssdebug > .i > .id { color: #008c40; }
 .cssdebug > .i > .class { color: #0064ff; }
+.cssdebug.selected > .i { display: none }
 `;
 
 var DISTANCE_STYLE = `
