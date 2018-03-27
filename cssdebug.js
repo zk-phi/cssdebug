@@ -10,18 +10,17 @@ var COMMON_STYLE = `
 `;
 
 var BOX_STYLE = `
-.cssdebug > .mg, .cssdebug > .bd, .cssdebug > .pd, .cssdebug > .bx {
-    border-width: 1px;
-    border-style: dashed;
+.cssdebug.selected > .mg,
+.cssdebug.selected > .bd,
+.cssdebug.selected > .pd,
+.cssdebug.selected > .bx {
+    background: none;
+    border-style: solid;
 }
-.cssdebug > .mg { border-color: #f39800; }
-.cssdebug:not(.selected) > .mg { background-color: rgba(243, 152, 0, 0.15); }
-.cssdebug > .bd { border-color: #ffd400; }
-.cssdebug:not(.selected) > .bd { background-color: rgba(255, 212, 0.15); }
-.cssdebug > .pd { border-color: #00bb20; }
-.cssdebug:not(.selected) > .pd { background-color: rgba(0, 140, 64, 0.15); }
-.cssdebug > .bx { border-color: #0000e6; }
-.cssdebug:not(.selected) > .bx { background-color: rgba(0, 100, 255, 0.15); }
+.cssdebug > .mg { background-color: rgba(243, 152, 0, 0.15); border: 1px #f39800 dashed; }
+.cssdebug > .bd { background-color: rgba(255, 212, 0.15); border: 1px #ffd400 dashed; }
+.cssdebug > .pd { background-color: rgba(0, 140, 64, 0.15); border: 1px #00bb20 dashed; }
+.cssdebug > .bx { background-color: rgba(0, 100, 255, 0.15); border: 1px #0000e6 dashed; }
 `;
 
 var TOOLTIP_STYLE = `
