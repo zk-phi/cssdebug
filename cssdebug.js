@@ -214,11 +214,11 @@ function renderDistance (baseElem, targetElem) {
 
     /* left */
     if (targetRect.left < baseRect.right) {
-        var leftDistance  = (targetRect.right <= baseRect.left ? targetRect.right : targetRect.left) - baseRect.left;
+        var leftDistance = (targetRect.right <= baseRect.left ? targetRect.right : targetRect.left) - baseRect.left;
         if (leftDistance) {
             var left          = createDIVWithClass('d');
-            left.style.top    = baseBoundingRect.top + offsetY + 'px';
-            left.style.height = baseBoundingRect.height + 'px';
+            left.style.top    = (leftDistance < 0 ? baseBoundingRect.top : targetBoundingRect.top) + offsetY + 'px';
+            left.style.height = (leftDistance < 0 ? baseBoundingRect.height : targetBoundingRect.height) + 'px';
             left.style.left   = Math.min(baseRect.left + leftDistance, baseRect.left) + offsetX + 'px';
             left.style.width  = Math.abs((baseRect.left + leftDistance) - baseRect.left) + 'px';
             left.innerHTML    = `<span>${ Math.abs(leftDistance) }</span>`;
@@ -228,11 +228,11 @@ function renderDistance (baseElem, targetElem) {
 
     /* right */
     if (baseRect.left < targetRect.right) {
-        var rightDistance  = (baseRect.right <= targetRect.left ? targetRect.left : targetRect.right) - baseRect.right;
+        var rightDistance = (baseRect.right <= targetRect.left ? targetRect.left : targetRect.right) - baseRect.right;
         if (rightDistance) {
             var right          = createDIVWithClass('d');
-            right.style.top    = baseBoundingRect.top + offsetY + 'px';
-            right.style.height = baseBoundingRect.height + 'px';
+            right.style.top    = (rightDistance > 0 ? baseBoundingRect.top : targetBoundingRect.top) + offsetY + 'px';
+            right.style.height = (rightDistance > 0 ? baseBoundingRect.height : targetBoundingRect.height) + 'px';
             right.style.left   = Math.min(baseRect.right + rightDistance, baseRect.right) + offsetX + 'px';
             right.style.width  = Math.abs((baseRect.right + rightDistance) - baseRect.right) + 'px';
             right.innerHTML    = `<span>${ Math.abs(rightDistance) }</span>`;
@@ -242,11 +242,11 @@ function renderDistance (baseElem, targetElem) {
 
     /* top */
     if (targetRect.top < baseRect.bottom) {
-        var topDistance  = (targetRect.bottom <= baseRect.top ? targetRect.bottom : targetRect.top) - baseRect.top;
+        var topDistance = (targetRect.bottom <= baseRect.top ? targetRect.bottom : targetRect.top) - baseRect.top;
         if (topDistance) {
             var top          = createDIVWithClass('d');
-            top.style.left   = baseBoundingRect.left + offsetX + 'px';
-            top.style.width  = baseBoundingRect.width + 'px';
+            top.style.left   = (topDistance < 0 ? baseBoundingRect.left : targetBoundingRect.left) + offsetX + 'px';
+            top.style.width  = (topDistance < 0 ? baseBoundingRect.width : targetBoundingRect.width) + 'px';
             top.style.top    = Math.min(baseRect.top + topDistance, baseRect.top) + offsetY + 'px';
             top.style.height = Math.abs((baseRect.top + topDistance) - baseRect.top) + 'px';
             top.innerHTML    = `<span>${ Math.abs(topDistance) }</span>`;
@@ -256,11 +256,11 @@ function renderDistance (baseElem, targetElem) {
 
     /* bottom */
     if (baseRect.top < targetRect.bottom) {
-        var bottomDistance  = (baseRect.bottom <= targetRect.top ? targetRect.top : targetRect.bottom) - baseRect.bottom;
+        var bottomDistance = (baseRect.bottom <= targetRect.top ? targetRect.top : targetRect.bottom) - baseRect.bottom;
         if (bottomDistance) {
             var bottom          = createDIVWithClass('d');
-            bottom.style.left   = baseBoundingRect.left + offsetX + 'px';
-            bottom.style.width  = baseBoundingRect.width + 'px';
+            bottom.style.left   = (bottomDistance > 0 ? baseBoundingRect.left : targetBoundingRect.left) + offsetX + 'px';
+            bottom.style.width  = (bottomDistance > 0 ? baseBoundingRect.width : targetBoundingRect.width) + 'px';
             bottom.style.top    = Math.min(baseRect.bottom + bottomDistance, baseRect.bottom) + offsetY + 'px';
             bottom.style.height = Math.abs((baseRect.bottom + bottomDistance) - baseRect.bottom) + 'px';
             bottom.innerHTML    = `<span>${ Math.abs(bottomDistance) }</span>`;
