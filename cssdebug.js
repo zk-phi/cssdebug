@@ -40,15 +40,14 @@ var TOOLTIP_STYLE = `
 
 var DISTANCE_STYLE = `
 .cssdebug > .d {
-    display: table;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     color: red;
     background-color: rgba(255, 0, 0, 0.3);
     font-size: 10px;
-    overflow: hidden;
     border: 1px red dashed;
 }
-.cssdebug > .d > span { display: table-cell; vertical-align: middle; }
 `;
 
 /* ---- utils */
