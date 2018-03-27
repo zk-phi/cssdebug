@@ -15,13 +15,13 @@ var BOX_STYLE = `
     border-style: dashed;
 }
 .cssdebug > .mg { border-color: #f39800; }
-.cssdebug:not(.selected) > .mg { background-color: rgba(243, 152, 0, 0.125); }
+.cssdebug:not(.selected) > .mg { background-color: rgba(243, 152, 0, 0.15); }
 .cssdebug > .bd { border-color: #ffd400; }
-.cssdebug:not(.selected) > .bd { background-color: rgba(255, 212, 0.125); }
+.cssdebug:not(.selected) > .bd { background-color: rgba(255, 212, 0.15); }
 .cssdebug > .pd { border-color: #00bb20; }
-.cssdebug:not(.selected) > .pd { background-color: rgba(0,140,64,0.125); }
+.cssdebug:not(.selected) > .pd { background-color: rgba(0, 140, 64, 0.15); }
 .cssdebug > .bx { border-color: #0000e6; }
-.cssdebug:not(.selected) > .bx { background-color: rgba(0,100,255,0.35); }
+.cssdebug:not(.selected) > .bx { background-color: rgba(0, 100, 255, 0.15); }
 `;
 
 var TOOLTIP_STYLE = `
@@ -44,7 +44,7 @@ var DISTANCE_STYLE = `
     display: table;
     text-align: center;
     color: red;
-    background-color: rgba(255, 0, 0, 0.125);
+    background-color: rgba(255, 0, 0, 0.3);
     font-size: 10px;
     overflow: hidden;
     border: 1px red dashed;
