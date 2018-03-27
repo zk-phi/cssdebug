@@ -75,15 +75,17 @@ var currentTarget        = undefined;
 var selectedGuide        = undefined;
 var selectedTarget       = undefined;
 
-function toggleSelected (elem) {
-    var unselect = elem == selectedTarget;
-
+function unselectCurrentSelection () {
     if (selectedGuide) {
         selectedGuide.parentNode.removeChild(selectedGuide);
         selectedGuide = selectedTarget = null;
     }
+}
 
-    if (currentGuide && !unselect) {
+function selectCurrentElem () {
+    unselectCurrentSelection();
+
+    if (currentGuide) {
         hideDistance();
         selectedGuide = currentGuide;
         selectedTarget = currentTarget;
@@ -298,6 +300,7 @@ if (typeof cssdebug_enabled == "boolean" && cssdebug_enabled) {
         hideDistance();
     });
     document.body.addEventListener('click', clickHandler = function (e) {
-        toggleSelected(e.target);
+        if (selectedGuide) return unselectCurrentSelection();
+        selectCurrentElem();
     });
 }
