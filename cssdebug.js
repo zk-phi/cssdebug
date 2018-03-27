@@ -273,21 +273,31 @@ function renderDistance (baseElem, targetElem) {
 
 /* ---- entrypoint */
 
-createStyleTag(COMMON_STYLE);
-createStyleTag(BOX_STYLE);
-createStyleTag(TOOLTIP_STYLE);
-createStyleTag(DISTANCE_STYLE);
+if (typeof cssdebug_enabled == "boolean" && cssdebug_enabled) {
+    cssdebug_enabled = false;
 
-document.body.addEventListener('mouseover', function (e) {
-    renderGuide(e.target);
-    if (selectedTarget) renderDistance(selectedTarget, e.target);
-});
+    mouseoutHandler();
 
-document.body.addEventListener('mouseout', function () {
-    hideGuide();
-    hideDistance();
-});
+    document.body.removeEventListener('mouseover', mouseoverHandler);
+    document.body.removeEventListener('mouseout', mouseoutHandler);
+    document.body.removeEventListener('click', clickHandler);
+} else {
+    cssdebug_enabled = true;
 
-document.body.addEventListener('click', function (e) {
-    toggleSelected(e.target);
-});
+    createStyleTag(COMMON_STYLE);
+    createStyleTag(BOX_STYLE);
+    createStyleTag(TOOLTIP_STYLE);
+    createStyleTag(DISTANCE_STYLE);
+
+    document.body.addEventListener('mouseover', mouseoverHandler = function (e) {
+        renderGuide(e.target);
+        if (selectedTarget) renderDistance(selectedTarget, e.target);
+    });
+    document.body.addEventListener('mouseout', mouseoutHandler = function () {
+        hideGuide();
+        hideDistance();
+    });
+    document.body.addEventListener('click', clickHandler = function (e) {
+        toggleSelected(e.target);
+    });
+}
