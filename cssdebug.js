@@ -299,7 +299,11 @@ if (typeof cssdebug_enabled == "boolean" && cssdebug_enabled) {
         hideDistance();
     });
     document.body.addEventListener('click', clickHandler = function (e) {
-        if (selectedGuide) return unselectCurrentSelection();
-        selectCurrentElem();
+        e.preventDefault();
+        if (selectedGuide) {
+            unselectCurrentSelection();
+        } else {
+            selectCurrentElem();
+        }
     });
 }
