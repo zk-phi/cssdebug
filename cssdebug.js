@@ -38,15 +38,44 @@ var TOOLTIP_STYLE = `
 .cssdebug.selected > .i { display: none }
 `;
 
-var DISTANCE_STYLE = `
-.cssdebug > .d {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: red;
-    background-color: rgba(255, 0, 0, 0.3);
+var VDISTANCE_STYLE = `
+.cssdebug > .dv {
+    padding-left: 5px;
     font-size: 10px;
-    border: 1px red dashed;
+    color: red;
+    border-left: 1px red solid;
+}
+.cssdebug > .dv:before {
+    content: ' ';
+    display: block;
+    position: absolute;
+    top: 0px;
+    left: -5px;
+    width: 10px;
+    height: 100%;
+    border-top: 1px red solid;
+    border-bottom: 1px red solid;
+}
+`;
+
+var HDISTANCE_STYLE = `
+.cssdebug > .dh {
+    text-align: center;
+    padding-top: 5px;
+    font-size: 10px;
+    color: red;
+    border-top: 1px red solid;
+}
+.cssdebug > .dh:before {
+    content: ' ';
+    display: block;
+    position: absolute;
+    top: -5px;
+    left: 0px;
+    width: 100%;
+    height: 10px;
+    border-left: 1px red solid;
+    border-right: 1px red solid;
 }
 `;
 
@@ -216,12 +245,13 @@ function renderDistance (baseElem, targetElem) {
     if (targetRect.left < baseRect.right) {
         var leftDistance = (targetRect.right <= baseRect.left ? targetRect.right : targetRect.left) - baseRect.left;
         if (leftDistance) {
-            var left          = createDIVWithClass('d');
-            left.style.top    = (leftDistance < 0 ? baseBoundingRect.top : targetBoundingRect.top) + offsetY + 'px';
-            left.style.height = (leftDistance < 0 ? baseBoundingRect.height : targetBoundingRect.height) + 'px';
-            left.style.left   = Math.min(baseRect.left + leftDistance, baseRect.left) + offsetX + 'px';
-            left.style.width  = Math.abs((baseRect.left + leftDistance) - baseRect.left) + 'px';
-            left.innerHTML    = `<span>${ Math.abs(leftDistance) }</span>`;
+            var left   = createDIVWithClass('dh');
+            var top    = (leftDistance < 0 ? baseBoundingRect.top : targetBoundingRect.top) + offsetY;
+            var height = leftDistance < 0 ? baseBoundingRect.height : targetBoundingRect.height;
+            left.style.top   = top + height / 2 + 'px';
+            left.style.left  = Math.min(baseRect.left + leftDistance, baseRect.left) + offsetX + 'px';
+            left.style.width = Math.abs((baseRect.left + leftDistance) - baseRect.left) + 'px';
+            left.innerHTML   = `<span>${ Math.abs(leftDistance) }</span>`;
             container.appendChild(left);
         }
     }
@@ -230,12 +260,13 @@ function renderDistance (baseElem, targetElem) {
     if (baseRect.left < targetRect.right) {
         var rightDistance = (baseRect.right <= targetRect.left ? targetRect.left : targetRect.right) - baseRect.right;
         if (rightDistance) {
-            var right          = createDIVWithClass('d');
-            right.style.top    = (rightDistance > 0 ? baseBoundingRect.top : targetBoundingRect.top) + offsetY + 'px';
-            right.style.height = (rightDistance > 0 ? baseBoundingRect.height : targetBoundingRect.height) + 'px';
-            right.style.left   = Math.min(baseRect.right + rightDistance, baseRect.right) + offsetX + 'px';
-            right.style.width  = Math.abs((baseRect.right + rightDistance) - baseRect.right) + 'px';
-            right.innerHTML    = `<span>${ Math.abs(rightDistance) }</span>`;
+            var right         = createDIVWithClass('dh');
+            var top           = (rightDistance > 0 ? baseBoundingRect.top : targetBoundingRect.top) + offsetY;
+            var height        = rightDistance > 0 ? baseBoundingRect.height : targetBoundingRect.height;
+            right.style.top   = top + height / 2 + 'px';
+            right.style.left  = Math.min(baseRect.right + rightDistance, baseRect.right) + offsetX + 'px';
+            right.style.width = Math.abs((baseRect.right + rightDistance) - baseRect.right) + 'px';
+            right.innerHTML   = `<span>${ Math.abs(rightDistance) }</span>`;
             container.appendChild(right);
         }
     }
@@ -244,12 +275,13 @@ function renderDistance (baseElem, targetElem) {
     if (targetRect.top < baseRect.bottom) {
         var topDistance = (targetRect.bottom <= baseRect.top ? targetRect.bottom : targetRect.top) - baseRect.top;
         if (topDistance) {
-            var top          = createDIVWithClass('d');
-            top.style.left   = (topDistance < 0 ? baseBoundingRect.left : targetBoundingRect.left) + offsetX + 'px';
-            top.style.width  = (topDistance < 0 ? baseBoundingRect.width : targetBoundingRect.width) + 'px';
-            top.style.top    = Math.min(baseRect.top + topDistance, baseRect.top) + offsetY + 'px';
-            top.style.height = Math.abs((baseRect.top + topDistance) - baseRect.top) + 'px';
-            top.innerHTML    = `<span>${ Math.abs(topDistance) }</span>`;
+            var top   = createDIVWithClass('dv');
+            var left  = (topDistance < 0 ? baseBoundingRect.left : targetBoundingRect.left) + offsetX;
+            var width = topDistance < 0 ? baseBoundingRect.width : targetBoundingRect.width;
+            top.style.left       = left + width / 2 + 'px';
+            top.style.top        = Math.min(baseRect.top + topDistance, baseRect.top) + offsetY + 'px';
+            top.style.lineHeight = Math.abs((baseRect.top + topDistance) - baseRect.top) + 'px';
+            top.innerHTML        = `<span>${ Math.abs(topDistance) }</span>`;
             container.appendChild(top);
         }
     }
@@ -258,12 +290,13 @@ function renderDistance (baseElem, targetElem) {
     if (baseRect.top < targetRect.bottom) {
         var bottomDistance = (baseRect.bottom <= targetRect.top ? targetRect.top : targetRect.bottom) - baseRect.bottom;
         if (bottomDistance) {
-            var bottom          = createDIVWithClass('d');
-            bottom.style.left   = (bottomDistance > 0 ? baseBoundingRect.left : targetBoundingRect.left) + offsetX + 'px';
-            bottom.style.width  = (bottomDistance > 0 ? baseBoundingRect.width : targetBoundingRect.width) + 'px';
-            bottom.style.top    = Math.min(baseRect.bottom + bottomDistance, baseRect.bottom) + offsetY + 'px';
-            bottom.style.height = Math.abs((baseRect.bottom + bottomDistance) - baseRect.bottom) + 'px';
-            bottom.innerHTML    = `<span>${ Math.abs(bottomDistance) }</span>`;
+            var bottom = createDIVWithClass('dv');
+            var left   = (bottomDistance > 0 ? baseBoundingRect.left : targetBoundingRect.left) + offsetX;
+            var width  = bottomDistance > 0 ? baseBoundingRect.width : targetBoundingRect.width;
+            bottom.style.left       = left + width / 2 + 'px';
+            bottom.style.top        = Math.min(baseRect.bottom + bottomDistance, baseRect.bottom) + offsetY + 'px';
+            bottom.style.lineHeight = Math.abs((baseRect.bottom + bottomDistance) - baseRect.bottom) + 'px';
+            bottom.innerHTML        = `<span>${ Math.abs(bottomDistance) }</span>`;
             container.appendChild(bottom);
         }
     }
@@ -287,7 +320,8 @@ if (typeof cssdebug_enabled == "boolean" && cssdebug_enabled) {
     createStyleTag(COMMON_STYLE);
     createStyleTag(BOX_STYLE);
     createStyleTag(TOOLTIP_STYLE);
-    createStyleTag(DISTANCE_STYLE);
+    createStyleTag(VDISTANCE_STYLE);
+    createStyleTag(HDISTANCE_STYLE);
 
     document.body.addEventListener('mouseover', mouseoverHandler = function (e) {
         renderGuide(e.target);
