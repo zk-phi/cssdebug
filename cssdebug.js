@@ -18,7 +18,7 @@ var BOX_STYLE = `
     border-style: solid;
 }
 .cssdebug > .mg { background-color: rgba(243, 152, 0, 0.15); border: 1px #f39800 dashed; }
-.cssdebug > .bd { background-color: rgba(255, 212, 0.15); border: 1px #ffd400 dashed; }
+.cssdebug > .bd { background-color: rgba(255, 212, 0, 0.15); border: 1px #ffd400 dashed; }
 .cssdebug > .pd { background-color: rgba(0, 140, 64, 0.15); border: 1px #00bb20 dashed; }
 .cssdebug > .bx { background-color: rgba(0, 100, 255, 0.15); border: 1px #0000e6 dashed; }
 `;
