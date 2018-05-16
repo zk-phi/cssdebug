@@ -245,6 +245,14 @@ function renderDistance (baseElem, targetElem) {
         right: targetBoundingRect.left + targetBoundingRect.width
     };
 
+    var baseStyles = window.getComputedStyle(baseElem);
+    var baseBorder = {
+        top: parseFloat(baseStyles['border-top-width']),
+        right: parseFloat(baseStyles['border-right-width']),
+        bottom: parseFloat(baseStyles['border-bottom-width']),
+        left: parseFloat(baseStyles['border-left-width'])
+    };
+
     var targetStyles = window.getComputedStyle(targetElem);
     var targetBorder = {
         top: parseFloat(targetStyles['border-top-width']),
@@ -260,11 +268,11 @@ function renderDistance (baseElem, targetElem) {
             var left   = createDIVWithClass('dh');
             var top    = (leftDistance < 0 ? baseBoundingRect.top : targetBoundingRect.top) + offsetY;
             var height = leftDistance < 0 ? baseBoundingRect.height : targetBoundingRect.height;
-            var border = targetRect.right <= baseRect.left ? 0 : targetBorder.left;
+            var border = leftDistance < 0 ? targetBorder.left : baseBorder.left;
             left.style.top   = top + height / 2 + 'px';
             left.style.left  = Math.min(baseRect.left + leftDistance, baseRect.left) + offsetX + 'px';
             left.style.width = Math.abs((baseRect.left + leftDistance) - baseRect.left) + 'px';
-            left.innerHTML   = `<span>${ Math.abs(leftDistance - border) + (border ? " + " + border : "") }</span>`;
+            left.innerHTML   = `<span>${ Math.abs(leftDistance) - border + (border ? " + " + border : "") }</span>`;
             container.appendChild(left);
         }
     }
@@ -276,11 +284,11 @@ function renderDistance (baseElem, targetElem) {
             var right  = createDIVWithClass('dh');
             var top    = (rightDistance > 0 ? baseBoundingRect.top : targetBoundingRect.top) + offsetY;
             var height = rightDistance > 0 ? baseBoundingRect.height : targetBoundingRect.height;
-            var border = baseRect.right <= targetRect.left ? 0 : targetBorder.right;
+            var border = rightDistance > 0 ? targetBorder.right : baseBorder.right;
             right.style.top   = top + height / 2 + 'px';
             right.style.left  = Math.min(baseRect.right + rightDistance, baseRect.right) + offsetX + 'px';
             right.style.width = Math.abs((baseRect.right + rightDistance) - baseRect.right) + 'px';
-            right.innerHTML   = `<span>${ Math.abs(rightDistance - border) + (border ? " + " + border : "") }</span>`;
+            right.innerHTML   = `<span>${ Math.abs(rightDistance) - border + (border ? " + " + border : "") }</span>`;
             container.appendChild(right);
         }
     }
@@ -292,11 +300,11 @@ function renderDistance (baseElem, targetElem) {
             var top    = createDIVWithClass('dv');
             var left   = (topDistance < 0 ? baseBoundingRect.left : targetBoundingRect.left) + offsetX;
             var width  = topDistance < 0 ? baseBoundingRect.width : targetBoundingRect.width;
-            var border = targetRect.bottom <= baseRect.top ? 0 : targetBorder.top;
+            var border = topDistance < 0 ? targetBorder.top : baseBorder.top;
             top.style.left       = left + width / 2 + 'px';
             top.style.top        = Math.min(baseRect.top + topDistance, baseRect.top) + offsetY + 'px';
             top.style.lineHeight = Math.abs((baseRect.top + topDistance) - baseRect.top) + 'px';
-            top.innerHTML        = `<span>${ Math.abs(topDistance - border) + (border ? " + " + border : "") }</span>`;
+            top.innerHTML        = `<span>${ Math.abs(topDistance) - border + (border ? " + " + border : "") }</span>`;
             container.appendChild(top);
         }
     }
@@ -308,11 +316,11 @@ function renderDistance (baseElem, targetElem) {
             var bottom = createDIVWithClass('dv');
             var left   = (bottomDistance > 0 ? baseBoundingRect.left : targetBoundingRect.left) + offsetX;
             var width  = bottomDistance > 0 ? baseBoundingRect.width : targetBoundingRect.width;
-            var border = baseRect.bottom <= targetRect.top ? 0 : targetBorder.bottom;
+            var border = bottomDistance > 0 ? targetBorder.bottom : baseBorder.bottom;
             bottom.style.left       = left + width / 2 + 'px';
             bottom.style.top        = Math.min(baseRect.bottom + bottomDistance, baseRect.bottom) + offsetY + 'px';
             bottom.style.lineHeight = Math.abs((baseRect.bottom + bottomDistance) - baseRect.bottom) + 'px';
-            bottom.innerHTML        = `<span>${ Math.abs(bottomDistance - border) + (border ? " + " + border : "") }</span>`;
+            bottom.innerHTML        = `<span>${ Math.abs(bottomDistance) - border + (border ? " + " + border : "") }</span>`;
             container.appendChild(bottom);
         }
     }
