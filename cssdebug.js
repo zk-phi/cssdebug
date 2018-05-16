@@ -42,8 +42,9 @@ var VDISTANCE_STYLE = `
 .cssdebug > .dv {
     padding-left: 5px;
     font-size: 10px;
+    font-weight: bold;
     color: red;
-    border-left: 2px red solid;
+    border-left: 1px red solid;
 }
 .cssdebug > .dv:before {
     content: ' ';
@@ -53,8 +54,8 @@ var VDISTANCE_STYLE = `
     left: -5px;
     width: 10px;
     height: 100%;
-    border-top: 2px red solid;
-    border-bottom: 2px red solid;
+    border-top: 1px red solid;
+    border-bottom: 1px red solid;
     font-weight: bold;
 }
 `;
@@ -64,8 +65,9 @@ var HDISTANCE_STYLE = `
     text-align: center;
     padding-top: 5px;
     font-size: 10px;
+    font-weight: bold;
     color: red;
-    border-top: 2px red solid;
+    border-top: 1px red solid;
 }
 .cssdebug > .dh:before {
     content: ' ';
@@ -75,8 +77,8 @@ var HDISTANCE_STYLE = `
     left: 0px;
     width: 100%;
     height: 10px;
-    border-left: 2px red solid;
-    border-right: 2px red solid;
+    border-left: 1px red solid;
+    border-right: 1px red solid;
     font-weight: bold;
 }
 `;
